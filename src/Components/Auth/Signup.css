@@ -1,0 +1,11 @@
+body{
+  background: #ecf0f3;
+  background-color: white;
+}
+
+.signUp{
+  box-shadow: 14px 14px 20px #d1cbd0, -14px -14px 20px white;
+ 
+ height:60vh;
+ align-items: center;
+}

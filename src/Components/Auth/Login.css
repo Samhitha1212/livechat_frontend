@@ -1,0 +1,14 @@
+
+.login{
+  align-items: center;
+}
+
+body{
+  background: #ecf0f3;
+}
+
+.login-page{
+  box-shadow: 4px 4px 10px rgb(109, 108, 108), -4px -4px 10px rgb(140, 136, 136);
+
+}
+

@@ -1,0 +1,74 @@
+body{
+  margin:0;
+  box-sizing: border-box;
+  background: #ecf0f3;
+}
+
+
+.club-logo{
+  width:30px;
+}
+
+.auth{
+  justify-content: space-between;
+  align-items: center;
+ 
+}
+
+#nav{
+  justify-content: space-between;
+  box-shadow: 4px 4px 10px rgb(109, 108, 108), -4px -4px 10px rgb(140, 136, 136);
+  border-radius: 10px;
+  margin:0px 2px
+ 
+  
+}
+
+li{
+  list-style-type: none;
+  padding:1rem;
+  
+}
+
+.auth li{
+  cursor: pointer;
+  text-decoration-color:white ;
+  transition: all 0.15 ease-in ;
+  
+}
+
+.auth li:hover{
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgb(145, 61, 145);
+  -webkit-text-decoration-color:rgb(145, 61, 145) ;
+  -moz-text-decoration-color:rgb(145, 61, 145) ;
+}
+
+
+
+@media screen and ( max-width:900px){
+
+.links,.navdetails li{
+  display: none;
+}
+
+#sidebar{
+  display: block;
+}
+
+  
+}
+
+@media screen and ( min-width:900px){
+ .navdetails,.links {
+    display: block;
+  }
+
+ #sidebar{
+  display: none;
+ }
+    
+  }
+

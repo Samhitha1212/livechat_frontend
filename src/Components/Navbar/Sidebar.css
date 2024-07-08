@@ -1,0 +1,36 @@
+.Sauth li{
+  cursor: pointer;
+  text-decoration-color:white ;
+  transition: all 0.15 ease-in ;
+  
+}
+
+.Sauth li:hover{
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: rgb(145, 61, 145);
+  -webkit-text-decoration-color:rgb(145, 61, 145) ;
+  -moz-text-decoration-color:rgb(145, 61, 145) ;
+}
+
+.sidehead{
+  display:flex;
+  justify-content: space-between;
+  align-items:center ;
+}
+
+.menu{
+  padding-right: 20px;
+}
+
+.show{
+width:100%;
+}
+
+.hide{
+  width:0;
+  height: 0;
+  overflow: hidden;
+  display:none;
+}
