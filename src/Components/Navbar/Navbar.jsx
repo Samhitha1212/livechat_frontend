@@ -27,6 +27,7 @@ function Navbar() {
         <div className='club-details navdetails flex'>
           <li><i class="bi bi-chat-dots-fill "></i></li>
           <li><span className='club-name text-3xl text-black'>ChatApp</span></li>
+          
         </div>
         </Link>
         <ul className='auth flex  text-black text-base decoration-white'>
@@ -39,7 +40,8 @@ function Navbar() {
            
             </>):(
               <>
-            <li className='links' onClick={logout}>LogOut</li> 
+              <li><span className='club-name text-3xl text-black'>{user.username}</span></li>
+            <li className='links' onClick={logout}>LogOut</li>
          <Link to={'/profile'}><li className= 'links'>Profile</li></Link> 
        
             </>)

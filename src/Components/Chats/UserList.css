@@ -2,3 +2,21 @@
 width:50vw;
 height:100vh
 }
+
+#search-text{
+  width:90%;
+  border:none;
+  
+}
+
+.searchcontainer{
+  column-gap: 10px;
+}
+
+input:focus{
+  outline: none;
+}
+
+.usercontainer{
+  height:80vh;
+}

@@ -1,0 +1,32 @@
+.chat{
+  width:50vw;
+  height:100vh
+}
+.msgcontainer{
+  height:80vh;
+ 
+  
+}
+.msg{
+  max-width:70%;
+  height:60px
+}
+
+.msgauther{
+  font-size: 10px;
+}
+
+.msgcontent{
+  font-size: 16px;
+}
+.msgtime{
+  font-size: 8px;
+}
+
+.left{
+ justify-content: left;
+}
+.right{
+  justify-content: right;
+
+}

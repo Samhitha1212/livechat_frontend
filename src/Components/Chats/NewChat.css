@@ -1,0 +1,20 @@
+.newchat{
+  width:50vw;
+  height:100vh
+}
+
+.msgblock{
+  height: 80vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.msginput{
+  height:8vh;
+  width:40vw
+}
+
+.sendbtn{
+  height: 8vh;
+  width:10vw;
+}

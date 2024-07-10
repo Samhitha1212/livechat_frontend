@@ -14,6 +14,9 @@ import AllChats from './Components/Chats/AllChats.jsx';
 import UserList from './Components/Chats/UserList.jsx';
 import axios from 'axios'
 import './App.css'
+import NewChat from './Components/Chats/NewChat.jsx';
+import Chat from './Components/Chats/Chat.jsx'
+import Home from './Home.jsx';
 
 function App() {
 
@@ -34,7 +37,7 @@ useEffect(()=>{
         username:User.username,
         email:User.email,
         photo:User.photo,
-        id:User._id
+        _id:User._id
       
 
       }))
@@ -43,7 +46,7 @@ useEffect(()=>{
         username:User.username,
         email:User.email,
         photo:User.photo,
-        id:User._id
+        _id:User._id
       
       }))
     }
@@ -66,8 +69,9 @@ const RequireAuth=({children})=>{
   return (
     <>
      <Navbar/>
+     <Home/>
      <Routes>
-      <Route path='/' element={<div className='flex '><AllChats/><UserList/></div>} />
+      {/* <Route path="/" element={<Home/>} /> */}
       <Route path='/login' element={<Login/>} />
       <Route path='/signup' element={<Signup/>} />
       <Route path='/profile' element={<RequireAuth><Profile/></RequireAuth>}/>
