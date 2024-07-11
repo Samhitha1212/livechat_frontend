@@ -3,3 +3,8 @@
   height:100vh
   
 }
+
+.chatscontainer{
+  overflow-y: scroll;
+  height:90vh;
+}

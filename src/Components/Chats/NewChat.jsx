@@ -4,8 +4,10 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { selectUser } from '../../Features/Userslice'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import { useSocketContext } from '../../context/SocketContext'
 
 function NewChat() {
+  const {onlineUsers}=useSocketContext()
   const [newmessage,setnewmessage]=useState("")
   const {userid}=useParams()
   const currentUser=useSelector(selectUser)
@@ -51,6 +53,7 @@ function NewChat() {
       <div className='memberdetail flex border shadow-md shadow-current p-1  justify-between mb-2'>
       <span>{chatmember?.username}</span>
       <span>{chatmember?.email}</span>
+      <span>{onlineUsers.includes(chatmember?._id)?"online":"Offline"}</span>
 
       </div>
       <div className='border-2 border-black msgblock flex '>

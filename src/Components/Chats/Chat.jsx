@@ -1,22 +1,38 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import "./Chat.css";
-
+import ScrollToBottom from 'react-scroll-to-bottom'
 import { useNavigate, useParams } from "react-router-dom";
 import { selectUser } from "../../Features/Userslice";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useSocketContext } from "../../context/SocketContext";
 
 function Chat() {
-  const [track,settrack]=useState(false)
+  const {onlineUsers,socket}=useSocketContext()
   const [newmessage, setnewmessage] = useState("");
   const {chatid}  = useParams();
   const currentUser = useSelector(selectUser);
   const [chat, setchat] = useState();
   const [messages, setmessages] = useState([]);
   const [members, setmembers] = useState([]);
-  const [displayname, setdisplayname] = useState("");
+  const [displayuser, setdisplayuser] = useState("");
   const[ names,setnames] = useState({});
   const messageref=useRef(null)
+
+
+  useEffect(()=>{
+
+    socket?.on("newMessage",(newMessagedetails)=>{
+      const {newmessage,newmessagechat}=newMessagedetails
+      if(newmessagechat._id == chatid){
+        setmessages([...messages,newmessage])
+       
+      }
+    })
+    return ()=> socket?.off("newMessage")
+
+  },[socket,messages])
+
   const sendMessage=async()=>{
     if(newmessage !== ""){
       const message={
@@ -25,8 +41,8 @@ function Chat() {
       }
       try{
         const res=await axios.post(`http://localhost:5001/api/message/${chatid}`,message)
+        // setmessages([...messages,res.data])
       messageref.current.value=""
-      settrack(!track)
       }catch(e){
         console.log(e)
       }
@@ -57,7 +73,7 @@ function Chat() {
     };
     renderData();
     
-  }, [track,chatid]);
+  }, [chatid]);
 
   useEffect(()=>{
     const updatednames={}
@@ -78,9 +94,12 @@ function Chat() {
         } else {
           id = chat.members[0];
         }
-        setdisplayname(names[id])
+        setdisplayuser({
+          _id:id,
+          displayname:names[id]
+        })
       } else {
-        setdisplayname(chat.grpname);
+        setdisplayuser({displayname:chat.grpname});
       }
 
     }
@@ -89,9 +108,15 @@ function Chat() {
   return (
     <div className="chat">
       {
-        displayname?(<>
-        <div className=' flex border border-black rounded shadow-md   shadow-current p-1  mb-2'>
-        <span> {displayname}</span>
+        displayuser?(<>
+        <div className=' flex border border-black rounded shadow-md   shadow-current p-1  mb-2 flex-col'>
+        <span className="text-stone-950"> {displayuser.displayname}</span>
+        {
+          chat.chatType === "one-to-one"?(<>
+          <span className="text-sm ">{onlineUsers.includes(displayuser._id)?"online":"Offline"}</span>
+          </>):(<></>)
+        }
+        
         </div>
         </>):(<></>)
       }
@@ -99,6 +124,7 @@ function Chat() {
      
       {messages ? (
         <div className="flex flex-col msgcontainer border border-black rounded shadow-md   shadow-current p-1  ">
+          <ScrollToBottom className="msgcontainer">
           {messages?.map((message) => (
             <div className={`flex ${message.author===currentUser._id?'right':'left'} m-2`}>
               <div className={` msg rounded-md p-1 border shadow shadow-current border-black flex flex-col `}>
@@ -108,6 +134,7 @@ function Chat() {
               </div>
             </div>
           ))}
+          </ScrollToBottom>
         </div>
       ) : (
         <>

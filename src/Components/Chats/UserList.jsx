@@ -4,15 +4,54 @@ import axios from "axios";
 import {useSelector} from 'react-redux'
 import { selectUser } from '../../Features/Userslice.js'
 import { useNavigate } from "react-router-dom";
+import { useSocketContext } from "../../context/SocketContext.jsx";
 
 
-function UserList() {
+function UserList({isgrp}) {
   const [usersList, setusersList] = useState([]);
+  const {onlineUsers}=useSocketContext()
   const [displaydata, setdisplaydata] = useState([]);
   const [searchtext, setsearchtext] = useState("");
 
+
+  const [isgrpCreating,setgrpCreating]=useState(isgrp)
+  const [grpmembers,setgrpmembers]=useState([])
+  const [grpname,setgrpname]=useState("")
+
   const currentUser=useSelector(selectUser)
   const navigate=useNavigate()
+
+
+  const handleCheckboxChange=(isuserselected,user)=>{
+    if(isuserselected){
+      setgrpmembers([...grpmembers,user])
+    }else{
+      setgrpmembers(
+        grpmembers.filter(mem=>{
+        return (mem._id != user._id)
+      }))
+    }
+    
+  }
+
+  const creategroup=async()=>{
+    let members=[]
+    grpmembers.forEach(mem=>{
+      members.push(mem._id)
+    })
+    const newgrp={
+      members,
+      chatType:"group",
+      grpname
+    }
+
+    const res= await axios.post('http://localhost:5001/api/chat/',{chat:newgrp}).then(res=>{
+      console.log(res.data)
+    }).catch(e=>{
+      console.log(e)
+    })
+    
+  }
   useLayoutEffect(() => {
     const renderData = async () => {
       try {
@@ -85,14 +124,41 @@ function UserList() {
         
         />
       </div>
+      {
+        isgrpCreating?(<>
+        <input  
+        type="text"
+         placeholder="Enter group name"
+         className="border border-black rounded shadow shadow-current p-3"
+         onChange={e=>setgrpname(e.target.value)}
+         />
+        <button className="border border-black rounded shadow shadow-current m-2  p-3  " onClick={creategroup}>Create Group</button>
+        
+        </>):(<></>)
+      }
       {displaydata?.length > 0 ? (
         <div className="mt-4 border-2 rounded-md shadow shadow-current border-black p-4 usercontainer">
           {displaydata.map((user) => (
             <div className="mt-4">
-              <div className="userbox border shadow shadow-current p-1 flex justify-between m-4" onClick={()=>{enterChat(user)}}>
+              <div className="userbox border shadow shadow-current p-1 flex justify-between m-4" onClick={()=>{isgrpCreating?null:enterChat(user)}}>
                 <span>{user.username}</span>
                 <span>{user.email}</span>
+                <span>{onlineUsers.includes(user._id)?"online":"Offline"}</span>
+                {
+                  isgrpCreating?(<>
+                    <input 
+              type="checkbox"
+              onChange={(e)=>{handleCheckboxChange(e.target.checked,user)}}
+              
+              
+              
+              />
+                  </>):(<></>)
+                }
+              
               </div>
+
+           
               
             </div>
           ))}
@@ -102,6 +168,23 @@ function UserList() {
           <h2>No user</h2>
         </>
       )}
+
+      {
+        (isgrpCreating && grpmembers.length>0)?(<>
+        <div>
+          Group Members:
+          {
+            grpmembers.map(mem=>(
+              <>
+              <span>{mem.username}, </span>
+              </>
+            ))
+          }
+        </div>
+        
+        
+        </>):(<></>)
+      }
     </div>
   );
 }
