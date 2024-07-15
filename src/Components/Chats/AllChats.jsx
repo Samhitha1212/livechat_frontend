@@ -35,6 +35,7 @@ function AllChats() {
           chat.chatid == newmessagechat._id ? { ...chat, lastMessage: newmessage } : chat
         )
       );
+      
 
       return ()=> socket?.off("newMessage")
     })
