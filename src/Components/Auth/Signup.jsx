@@ -23,6 +23,7 @@ const [username,setUsername]=useState()
         username:username,
         fid:cred.user.uid,
       }).then(res=>{
+        alert("Signed Up")
         console.log("new user created created")
       }).catch(err=>{
         console.log(err.message)

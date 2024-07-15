@@ -35,20 +35,20 @@ function App() {
         dispatch(
           login({
             fid: authUser.uid,
-            username: User.username,
-            email: User.email,
-            photo: User.photo,
-            _id: User._id,
+            username: User?.username,
+            email: User?.email,
+            photo: User?.photo,
+            _id: User?._id,
           })
         );
         localStorage.setItem(
           "user",
           JSON.stringify({
             fid: authUser.uid,
-            username: User.username,
-            email: User.email,
-            photo: User.photo,
-            _id: User._id,
+            username: User?.username,
+            email: User?.email,
+            photo: User?.photo,
+            _id: User?._id,
           })
         );
       } else {
