@@ -56,7 +56,7 @@ function App() {
         localStorage.setItem("user", JSON.stringify({}));
       }
     });
-  }, [dispatch,user]);
+  }, [dispatch]);
 
   const RequireAuth = ({ children }) => {
     return user ? children : <Navigate to="/login" />;
