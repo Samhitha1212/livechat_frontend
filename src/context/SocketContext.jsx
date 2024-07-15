@@ -17,7 +17,7 @@ export const SocketContextProvider=({children})=>{
 
   useEffect(()=>{
     if(currentUser){
-      const socket=io("http://localhost:5001",{
+      const socket=io("https://livechat-backend-j9re.onrender.com",{
         query:{
           userId:currentUser._id,
         }
