@@ -45,7 +45,7 @@ function UserList({isgrp}) {
       grpname
     }
 
-    const res= await axios.post('http://localhost:5001/api/chat/',{chat:newgrp}).then(res=>{
+    const res= await axios.post('https://livechat-backend-j9re.onrender.com/api/chat/',{chat:newgrp}).then(res=>{
       console.log(res.data)
     }).catch(e=>{
       console.log(e)
@@ -55,7 +55,7 @@ function UserList({isgrp}) {
   useLayoutEffect(() => {
     const renderData = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/user");
+        const res = await axios.get("https://livechat-backend-j9re.onrender.com/api/user");
         setusersList( res.data.sort((a,b)=>{
           if(a.username.toLowerCase()<b.username.toLowerCase())
             return -1
@@ -92,7 +92,7 @@ function UserList({isgrp}) {
 
   const enterChat=async(user)=>{
 
-    const res= await axios.get(`http://localhost:5001/api/chat/${currentUser._id}`)
+    const res= await axios.get(`https://livechat-backend-j9re.onrender.com/api/chat/${currentUser._id}`)
     const chats=res.data
 
     const chat =chats.filter((chat)=>{

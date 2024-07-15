@@ -29,7 +29,7 @@ function App() {
     auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
         const res = await axios.get(
-          `http://localhost:5001/api/user?fid=${authUser.uid}`
+          `https://livechat-backend-j9re.onrender.com/api/user?fid=${authUser.uid}`
         );
         const User = res.data;
         dispatch(

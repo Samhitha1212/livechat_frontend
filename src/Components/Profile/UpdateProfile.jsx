@@ -18,7 +18,7 @@ function UpdateProfile() {
     if(photo){
       profile.photo=photo
     }
-   const res= await axios.put(`http://localhost:5001/api/user/${user._id}`,profile).then(res=>{
+   const res= await axios.put(`https://livechat-backend-j9re.onrender.com/api/user/${user._id}`,profile).then(res=>{
     console.log(res,profile)
    }).catch(err=>{
     console.log(err)

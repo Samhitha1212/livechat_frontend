@@ -16,7 +16,7 @@ function NewChat() {
   useEffect(() => {
     const renderData = async () => {
       try {
-        const res = await axios.get(`http://localhost:5001/api/user/${userid}`);
+        const res = await axios.get(`https://livechat-backend-j9re.onrender.com/api/user/${userid}`);
         setchatmember(res.data)
       } catch (err) {
         console.log(err);
@@ -38,7 +38,7 @@ function NewChat() {
 
     }
 
-    const res=await axios.post('http://localhost:5001/api/chat',{
+    const res=await axios.post('https://livechat-backend-j9re.onrender.com/api/chat',{
       chat,
       message
     })

@@ -40,7 +40,7 @@ function Chat() {
         content:newmessage
       }
       try{
-        const res=await axios.post(`http://localhost:5001/api/message/${chatid}`,message)
+        const res=await axios.post(`https://livechat-backend-j9re.onrender.com/api/message/${chatid}`,message)
         // setmessages([...messages,res.data])
       messageref.current.value=""
       }catch(e){
@@ -60,12 +60,12 @@ function Chat() {
   useLayoutEffect(() => {
     const renderData = async () => {
       try {
-      const chatres = await axios.get(`http://localhost:5001/api/chat/?chatid=${chatid}`)
+      const chatres = await axios.get(`https://livechat-backend-j9re.onrender.com/api/chat/?chatid=${chatid}`)
       setchat(chatres.data);
-      const memres = await axios.get(`http://localhost:5001/api/user/?grpid=${chatid}`)
+      const memres = await axios.get(`https://livechat-backend-j9re.onrender.com/api/user/?grpid=${chatid}`)
       setmembers(memres.data);
       const mesres = await axios.get(
-      `http://localhost:5001/api/message/${chatid}`)
+      `https://livechat-backend-j9re.onrender.com/api/message/${chatid}`)
       setmessages(mesres.data);
       } catch (err) {
         console.log(err);

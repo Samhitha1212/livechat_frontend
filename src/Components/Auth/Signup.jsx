@@ -18,7 +18,7 @@ const [username,setUsername]=useState()
       console.log("signed up")
       // console.log(cred.user)
       console.log(cred.user.uid,cred)
-       axios.post('http://localhost:5001/api/user',{
+       axios.post('https://livechat-backend-j9re.onrender.com/api/user',{
         email:email,
         username:username,
         fid:cred.user.uid,
