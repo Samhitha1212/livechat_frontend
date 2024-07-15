@@ -43,10 +43,10 @@ function Navbar() {
                  <Link to={'/profile'}><li className= 'links'>Profile</li></Link> 
            
                 <li>
-                <span className=''><img className='propic' src={`${user.photo}`} alt='profilepic'/></span>
+                <span className=''><img className='propic' src={`${user?.photo}`} alt='profilepic'/></span>
                 </li>
                 <li>
-                <span className='club-name text-3xl text-black'>{user.username}</span>
+                <span className='club-name text-3xl text-black'>{user?.username}</span>
                 </li>
              
               
