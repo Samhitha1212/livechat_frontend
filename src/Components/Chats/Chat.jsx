@@ -26,7 +26,7 @@ function Chat() {
       const {newmessage,newmessagechat}=newMessagedetails
       if(newmessagechat._id == chatid){
         setmessages([...messages,newmessage])
-       
+       console.log("socket")
       }
     })
     return ()=> socket?.off("newMessage")
@@ -36,7 +36,7 @@ function Chat() {
   const sendMessage=async()=>{
     if(newmessage !== ""){
       const message={
-        author:currentUser._id,
+        author:currentUser?._id,
         content:newmessage
       }
       try{
@@ -79,7 +79,7 @@ function Chat() {
     const updatednames={}
     members.length>0?(
       members.forEach((member) => {
-          updatednames[member._id]={"username":member.username,"photo":member.photo}
+          updatednames[member._id]={"username":member?.username,"photo":member?.photo}
     })):(null);
     setnames(updatednames)
   },[members,chatid])
@@ -89,7 +89,7 @@ function Chat() {
    
     if(chat && members ) {
       if (chat.chatType === "one-to-one") {
-        if (chat.members[0] === currentUser._id) {
+        if (chat.members[0] === currentUser?._id) {
           id = chat.members[1];
         } else {
           id = chat.members[0];
@@ -134,9 +134,9 @@ function Chat() {
         <div className="flex flex-col msgcontainer border border-black rounded shadow-md   shadow-current p-1  ">
           <ScrollToBottom className="msgcontainer">
           {messages?.map((message) => (
-            <div className={`flex ${message.author===currentUser._id?'right':'left'} m-2`}>
+            <div className={`flex ${message.author===currentUser?._id?'right':'left'} m-2`}>
               <div className={` msg rounded-md p-1 border shadow shadow-current border-black flex flex-col `}>
-               <div className=" msgauther flex ">{names[message?.author].username}</div>
+               <div className=" msgauther flex ">{names[message.author]?.username}</div>
                 <div className="msgcontent flex">{message.content}</div>
                 <div className="msgtime flex justify-end">{convertToTime(message.createdAt)}</div>
               </div>
