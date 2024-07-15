@@ -5,6 +5,7 @@ import UserReducer from '../Features/Userslice.js'
 export  const store=configureStore({
   reducer:{
     user:UserReducer,
-  }
+  },
+  devTools:false
 })
 
