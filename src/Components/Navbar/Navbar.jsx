@@ -1,5 +1,4 @@
 import React, {  useState } from 'react'
-import clubLogo from '../../assets/club-logo.png'
 import './Navbar.css'
 import { Link } from 'react-router-dom';
 import Sidebar from './Sidebar.jsx';
@@ -39,12 +38,22 @@ function Navbar() {
             <Link to={'/signup'}><li className='links'>SingUp</li></Link>
            
             </>):(
-              <>
-              <li><span className='club-name text-3xl text-black'>{user.username}</span></li>
-            <li className='links' onClick={logout}>LogOut</li>
-         <Link to={'/profile'}><li className= 'links'>Profile</li></Link> 
+              <div className='flex justify-center align-middle'>
+                 <li className='links' onClick={logout}>LogOut</li>
+                 <Link to={'/profile'}><li className= 'links'>Profile</li></Link> 
+           
+                <li>
+                <span className=''><img className='propic' src={`${user.photo}`} alt='profilepic'/></span>
+                </li>
+                <li>
+                <span className='club-name text-3xl text-black'>{user.username}</span>
+                </li>
+             
+              
+           
+        
        
-            </>)
+            </div>)
           }
            </div>
           

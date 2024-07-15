@@ -71,6 +71,7 @@ function AllChats() {
     chats.forEach(chat=>{
       let chatName;
       let id
+      let photo
       if(chat.chatType==="group"){
         chatName=chat.grpname
 
@@ -78,7 +79,8 @@ function AllChats() {
         chat.members.forEach(member=>{
           if(member._id !== currentUser._id){
             chatName=member.username
-            id=member._id
+            id=member._id,
+            photo=member.photo
           }
         })
       }
@@ -87,6 +89,7 @@ function AllChats() {
         id,
         chatid:chat._id,
         chatName,
+        photo,
         lastMessage:chat.lastMessage,
         chatType:chat.chatType
       })
@@ -99,7 +102,6 @@ function AllChats() {
 
   return (
     <div className='allchats border-2 border-black rounded-md shadow-current shadow-inner p-8'>
-      All charts
       <div className='chatscontainer'>
         {
           displaychats.length>0?(
@@ -108,20 +110,29 @@ function AllChats() {
             displaychats.map(data=>(
               <>
               <Link to={`/chat/${data.chatid}`}>
-              <div className='flex flex-col border border-black shadow  m-1 p-2 ' >
-               <strong className='flex justify-between'>
+              <div className=' chat flex  ' >
+            <div className='pro'>
+            <span className=''><img className='propic' src={`${data.photo?data.photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKYamkRB_qMHdd_HvhrxBlHhExgcAW6Mquw&s'}`} /></span>
+            </div>
+                
+               
+                <div className='flex  chat-info  '>
+                <strong className='flex justify-between'>
                 <span className='text-black'>{data.chatName}</span>
                 {
                   data.chatType==="one-to-one"?(<>
-                   <span className='text-sm'>{onlineUsers.includes(data.id)?"online":"Offline"}</span>
+                   <span className={` chat-status text-sm ${onlineUsers.includes(data.id)?"online":"offline"}`}>{onlineUsers.includes(data.id)?"online":"Offline"}</span>
                   </>):(<></>)
                 }
                
                </strong> 
-                <span className='text-sm flex justify-between'>
-                 <span>{data.lastMessage?.content}</span>
-                 <span>{convertToTime(data.lastMessage?.createdAt)}</span> 
+                <span className='text-sm  last-message flex justify-between'>
+                 <span className='content'> {data.lastMessage?.content}</span>
+                 <span className='time'>
+                  {data.lastMessage?.createdAt?convertToTime(data.lastMessage?.createdAt):""}</span> 
                 </span>
+                </div>
+          
               </div>
               </Link>
               </>

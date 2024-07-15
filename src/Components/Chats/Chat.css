@@ -1,16 +1,21 @@
 .chat{
   width:50vw;
-  height:100vh
+  
+  align-items: center;
 }
 .msgcontainer{
-  height:80vh;
+  height:74vh;
   overflow-y: scroll;
+  width:94%
  
   
 }
+.chattitle{
+  width:94%
+}
 .msg{
   max-width:70%;
-  height:60px
+  height:54px
 }
 
 .msgauther{
@@ -30,4 +35,8 @@
 .right{
   justify-content: right;
 
+}
+
+.inputcontainer{
+  width:94%
 }

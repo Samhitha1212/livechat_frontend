@@ -18,8 +18,8 @@ function UpdateProfile() {
     if(photo){
       profile.photo=photo
     }
-   res= await axios.put(`http://localhost:5001/api/user/${user.id}`,profile).then(res=>{
-    console.log(res)
+   const res= await axios.put(`http://localhost:5001/api/user/${user._id}`,profile).then(res=>{
+    console.log(res,profile)
    }).catch(err=>{
     console.log(err)
    })
@@ -33,9 +33,10 @@ function UpdateProfile() {
       
       <div class="inputs flex flex-col border border-inherit">
     <label className='form-label'>UserName</label>
-    <input className='form-input' onChange={e=>setUsername(e.target.value)} id='display-name' type="text" placeholder="" />
+    <input className='form-input' 
+    onChange={e=>setUsername(e.target.value)} id='display-name' type="text" placeholder="" />
     <label className='form-label'>Photo url</label>
-    <input className='form-input' id='photo-url'  type="text" placeholder="" />
+    <input className='form-input' id='photo-url'  type="file" placeholder="" onChange={e=>setphoto(e.target.value)}/>
     <button  id='add-bt' type="submit" className='mt-4 form-button' onClick={updateprofile}>Update</button>
   </div>
     </div>

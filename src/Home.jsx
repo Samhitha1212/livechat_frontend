@@ -16,20 +16,23 @@ function LeftPortion() {
   const setUsers=()=>{
     setShow("users")
   }
+  const setgrp=()=>{
+    setisgrp(true)
+  }
   return (
-    <div>
-      <div>
-      <div className="flex  justify-between">
-        <span onClick={setchats} >Your Chats</span>
-        <span onClick={setUsers} >All users</span>
+   
+      <div className="leftportion flex  flex-col">
+      <div className="flex p-1 rounded border border-black header justify-around">
+        <div  className={`headerelem ${show==="chats"?"selected":""}`} onClick={setchats} >Your Chats</div>
+        <div className={`headerelem ${show==="users"?"selected":""}`} onClick={setUsers} >All users</div>
        <Link to={'/creategrp'}>
-       <span >Create Group</span>
+       <div onClick={setgrp} className={`headerelem ${isgrp?"selected":""} border-black`}>Create Group</div>
        </Link> 
       </div>
       {show==="chats"?(<AllChats/>):(<UserList isgrp={false}/>)}
     </div>
       
-    </div>
+   
   )
 }
 

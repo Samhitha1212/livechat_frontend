@@ -141,6 +141,7 @@ function UserList({isgrp}) {
           {displaydata.map((user) => (
             <div className="mt-4">
               <div className="userbox border shadow shadow-current p-1 flex justify-between m-4" onClick={()=>{isgrpCreating?null:enterChat(user)}}>
+              <span className=''><img className='propic' src={`${user.photo?user.photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKYamkRB_qMHdd_HvhrxBlHhExgcAW6Mquw&s'}`} /></span>
                 <span>{user.username}</span>
                 <span>{user.email}</span>
                 <span>{onlineUsers.includes(user._id)?"online":"Offline"}</span>

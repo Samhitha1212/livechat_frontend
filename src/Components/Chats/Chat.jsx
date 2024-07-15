@@ -79,7 +79,7 @@ function Chat() {
     const updatednames={}
     members.length>0?(
       members.forEach((member) => {
-          updatednames[member._id]=member.username
+          updatednames[member._id]={"username":member.username,"photo":member.photo}
     })):(null);
     setnames(updatednames)
   },[members,chatid])
@@ -96,7 +96,9 @@ function Chat() {
         }
         setdisplayuser({
           _id:id,
-          displayname:names[id]
+          displayname:names[id]?.username,
+          photo:names[id]?.photo
+          
         })
       } else {
         setdisplayuser({displayname:chat.grpname});
@@ -106,11 +108,17 @@ function Chat() {
   },[members,chatid,names])
 
   return (
-    <div className="chat">
+    <div className="chat p-4 flex flex-col">
       {
         displayuser?(<>
-        <div className=' flex border border-black rounded shadow-md   shadow-current p-1  mb-2 flex-col'>
+        <div className=' flex chattitle border border-black rounded shadow-md   shadow-current p-1  mb-2 justify-between'>
+          <div className="flex">
+         
+            <span className=''><img className='propic' src={`${displayuser.photo?displayuser.photo:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLKYamkRB_qMHdd_HvhrxBlHhExgcAW6Mquw&s'}`} /></span>
+          
         <span className="text-stone-950"> {displayuser.displayname}</span>
+          </div>
+
         {
           chat.chatType === "one-to-one"?(<>
           <span className="text-sm ">{onlineUsers.includes(displayuser._id)?"online":"Offline"}</span>
@@ -122,13 +130,13 @@ function Chat() {
       }
       
      
-      {messages ? (
+      {messages.length>0 ? (
         <div className="flex flex-col msgcontainer border border-black rounded shadow-md   shadow-current p-1  ">
           <ScrollToBottom className="msgcontainer">
           {messages?.map((message) => (
             <div className={`flex ${message.author===currentUser._id?'right':'left'} m-2`}>
               <div className={` msg rounded-md p-1 border shadow shadow-current border-black flex flex-col `}>
-               <div className=" msgauther flex ">{names[message.author]}</div>
+               <div className=" msgauther flex ">{names[message?.author].username}</div>
                 <div className="msgcontent flex">{message.content}</div>
                 <div className="msgtime flex justify-end">{convertToTime(message.createdAt)}</div>
               </div>
@@ -141,7 +149,7 @@ function Chat() {
         <h1>No messages</h1>
         </>
       )}
-      <div className="flex">
+      <div className="flex inputcontainer mt-3">
       <input 
       className='msginput rounded border border-black'
       type='text'
