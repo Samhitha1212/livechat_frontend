@@ -54,8 +54,11 @@ function AllChats() {
   useEffect(()=>{
     const fetchChatData=async()=>{
       try{
-        const res= await axios.get(`https://livechat-backend-j9re.onrender.com/api/chat/full/${currentUser._id}`)
-        setchats(res.data)
+        if(currentUser){
+          const res= await axios.get(`https://livechat-backend-j9re.onrender.com/api/chat/full/${currentUser._id}`)
+          setchats(res.data)
+        }
+        
 
       }catch(e){
         console.log(e)
