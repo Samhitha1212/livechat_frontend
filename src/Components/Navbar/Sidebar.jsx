@@ -29,12 +29,12 @@ function Sidebar() {
   return (
     <div className='flex flex-col' id='sidebar'>
       <div className='flex sidehead'>
-
+      <Link to={'/'}>
          <div className='club-details flex'>
-          <li><img  className='club-logo' src={clubLogo} alt='Club logo'/></li>
-          <li><span className='club-name text-3xl text-black'>Lambda</span></li>
+         <li><i class="bi bi-chat-dots-fill "></i></li>
+          <li><span className='club-name text-3xl text-black'>ChatApp</span></li>
         </div>
-      
+        </Link>
         <span  className='menu' onClick={changesidebar}><i  class="bi bi-list"></i></span>
         </div>
         <div className={`Sauth flex flex-col ${showsidebar?"show":"hide"}`}>
@@ -42,7 +42,6 @@ function Sidebar() {
             !user?(<>
              
             <Link to={'/login'}> <li >LogIn</li></Link>
-            <Link to={'/adminlogin'}> <li >LogIn as Admin</li></Link>
             <Link to={'/signup'}><li >SingUp</li></Link>
            
             </>):(
@@ -50,6 +49,12 @@ function Sidebar() {
             <li onClick={logout} >LogOut</li> 
           <Link to={'/profile'}><li>Profile</li></Link>
 
+          <li>
+                <span className=''><img className='propic' src={`${user.photo}`} alt='profilepic'/></span>
+                </li>
+                <li>
+                <span className='club-name text-3xl text-black'>{user.username}</span>
+                </li>
             </>)
           }
       </div>

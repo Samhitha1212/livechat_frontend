@@ -26,7 +26,7 @@ function Chat() {
       const {newmessage,newmessagechat}=newMessagedetails
       if(newmessagechat._id == chatid){
         setmessages([...messages,newmessage])
-       console.log("socket")
+       console.log("socket receved msg")
       }
     })
     return ()=> socket?.off("newMessage")

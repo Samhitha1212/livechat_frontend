@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "http://localhost:5001/api",
+  "proxy": "https://livechat-backend-j9re.onrender.com/api",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
